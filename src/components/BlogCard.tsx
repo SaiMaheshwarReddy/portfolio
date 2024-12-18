@@ -1,19 +1,43 @@
+"use client";
+import { useRouter } from "next/navigation";
+// import { redirect } from "next/navigation";
 import React from "react";
 
-const BlogCard = () => {
+type BlogCardProps = {
+  title: string;
+  className?: string;
+  url: string;
+  publishedDate: string;
+  tags: string[];
+  excerpt: string;
+};
+const BlogCard = ({
+  className,
+  title,
+  excerpt,
+  tags,
+  publishedDate,
+  url,
+}: BlogCardProps) => {
+  const router = useRouter();
+  const getDate = (data: string) => {
+    const date = new Date(data);
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  };
   return (
-    <div className="sm:max-w-[420px] bg-white p-3  rounded-md flex flex-col gap-3">
-      <p className="text-2xl font-bold">Making a design system from scratch</p>
+    <div
+      className={`md:max-w-full xl:max-w-[460px] 2xl:max-w-[420px] bg-white p-3 shadow-md  rounded-md cursor-pointer flex flex-col gap-3 ${className}`}
+      onClick={() => {
+        router.push(url);
+      }}
+    >
+      <p className="text-2xl font-bold">{title}</p>
       <div className="flex gap-4 font-medium text-gray-600">
-        <div>12 Feb 2020</div>
+        <div>{getDate(publishedDate)}</div>
         <div>|</div>
-        <div>Design, Pattern</div>
+        <div>{tags.join(", ")}</div>
       </div>
-      <p>
-        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-        sint. Velit officia consequat duis enim velit mollit. Exercitation
-        veniam consequat sunt nostrud amet.
-      </p>
+      <p>{excerpt}</p>
     </div>
   );
 };

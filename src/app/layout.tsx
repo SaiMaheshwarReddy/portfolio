@@ -42,7 +42,9 @@ export default function RootLayout({
       >
         <SideNav />
 
-        <div className="sm:pt-24 pt-20">{children}</div>
+        <div className="sm:pt-24 pt-20 mx-auto xl:w-[75%] 2xl:w-[68%]">
+          {children}
+        </div>
         <footer className="p-12">
           <p className="text-center text-lg mb-4 font-semibold text-gray-600">
             Follow me on
