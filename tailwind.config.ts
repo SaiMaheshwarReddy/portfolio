@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         primary: "#FF6464",
         lightBlue: "#EDF7FA",
+        primaryDark: "#D04848",
       },
     },
   },

@@ -36,7 +36,7 @@ export default async function Home() {
           <p className="text-center md:text-left text-lg">
             {`I like building performant and detail-oriented UI's that contribute to an exceptional user experience. I enjoy working in fast-paced environments that focus on structured goals and a shared vision`}
           </p>
-          <button className="bg-primary text-white font-semibold py-3 px-6 rounded-sm">
+          <button className="bg-primary text-white font-semibold py-3 px-6 rounded-sm focus:outline-none  hover:bg-primaryDark focus:ring-4 focus:ring-red-200 ">
             Download Resume
           </button>
         </div>
