@@ -1,5 +1,5 @@
-import BlogCard from "@/components/BlogCard";
-import Link from "next/link";
+// import BlogCard from "@/components/BlogCard";
+// import Link from "next/link";
 import React from "react";
 
 const Blog = () => {
