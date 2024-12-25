@@ -1,8 +1,13 @@
-import { getEntryBySlug } from "@/utils/contentful";
+import { getEntryBySlug, getProjects } from "@/utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 import React from "react";
-
+export async function generateStaticParams() {
+  const projectsList = await getProjects();
+  return projectsList.map((project) => ({
+    slug: project.slug,
+  }));
+}
 const page = async ({ params }) => {
   const slug = await params.slug;
   const project = await getEntryBySlug(slug, "project");
