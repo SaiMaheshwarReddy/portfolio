@@ -5,22 +5,25 @@ import Link from "next/link";
 import FeatureCard from "@/components/FeatureCard";
 import { fetchDevToArticles } from "@/utils/devTo";
 import { IDevToArticle } from "./types";
+import DownloadButton from "@/components/DownloadButton";
+import { getProjects } from "@/utils/contentful";
 
 export default async function Home() {
   // contentful articles
   // const router = useRouter();
   // const blogs = await getBlogPosts();
   const devToArticles: IDevToArticle[] = await fetchDevToArticles();
-
+  const projectsList = await getProjects();
+  console.log(projectsList);
   return (
     <div className="w-full">
       <section className=" flex justify-center items-center md:items-start flex-col lg:px-20 2xl:px-3 2xl:gap-16 xl:gap-14 xl:px-10 md:px-20 pb-16 sm:pt-6 sm:px-5 px-3 gap-10 md:flex-row-reverse  mx-auto">
-        <div className="rounded-full w-44 h-44 2xl:w-60 2xl:h-60 flex-shrink-0 flex-grow-0">
+        <div className="rounded-full w-52 h-52 2xl:w-60 2xl:h-60 flex-shrink-0 flex-grow-0">
           <Image
             className="rounded-full object-cover w-full h-full"
             src={profile}
-            width={176}
-            height={176}
+            width={208}
+            height={208}
             alt="profile"
           />
         </div>
@@ -36,9 +39,7 @@ export default async function Home() {
           <p className="text-center md:text-left text-lg">
             {`I like building performant and detail-oriented UI's that contribute to an exceptional user experience. I enjoy working in fast-paced environments that focus on structured goals and a shared vision`}
           </p>
-          <button className="bg-primary text-white font-semibold py-3 px-6 rounded-sm focus:outline-none  hover:bg-primaryDark focus:ring-4 focus:ring-red-200 ">
-            Download Resume
-          </button>
+          <DownloadButton />
         </div>
       </section>
       <section className="bg-lightBlue py-7 md:px-20 2xl:px-3 lg:px-20  xl:px-10 sm:px-5 px-3 text-left">
@@ -68,20 +69,6 @@ export default async function Home() {
                 );
               }
             )}
-            {devToArticles.map(
-              ({ id, url, description, published_at, tag_list, title }) => {
-                return (
-                  <BlogCard
-                    title={title}
-                    key={id}
-                    excerpt={description}
-                    url={url}
-                    publishedDate={published_at}
-                    tags={tag_list}
-                  />
-                );
-              }
-            )}
           </div>
         </div>
       </section>
@@ -90,9 +77,18 @@ export default async function Home() {
           <p className="text-center text-lg sm:text-left">Featured works</p>
         </div>
         <div className="flex flex-col justify-between items-center gap-5 mt-2">
-          <FeatureCard />
-          <FeatureCard />
-          <FeatureCard />
+          {projectsList.map((project) => {
+            return (
+              <FeatureCard
+                key={project.projectName}
+                projectExcerpt={project.projectExcerpt}
+                projectName={project.projectName}
+                primaryImage={project.primaryImage?.fields?.file?.url}
+                projectDate={project.projectDate}
+                projectSlug={project.slug}
+              />
+            );
+          })}
         </div>
       </section>
     </div>

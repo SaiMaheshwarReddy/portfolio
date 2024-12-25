@@ -21,7 +21,15 @@ const BlogCard = ({
 }: BlogCardProps) => {
   const getDate = (data: string) => {
     const date = new Date(data);
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+
+    const options = {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-GB", options);
+
+    return formattedDate;
   };
   return (
     <div

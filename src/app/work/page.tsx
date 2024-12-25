@@ -1,17 +1,17 @@
 import FeatureCard from "@/components/FeatureCard";
+import { getProjects } from "@/utils/contentful";
 import React from "react";
 
-const Work = () => {
+const Work = async () => {
+  const projectsList = await getProjects();
+  console.log(projectsList);
   return (
-    <section className="py-5 lg:px-20 2xl:px-3 xl:px-10 md:px-20 sm:px-5 px-3 flex flex-col md:items-center">
-      <h1 className="w-full font-bold text-3xl">Work</h1>
-      <div className="flex flex-col justify-between items-center gap-5 mt-2">
+    <section className="py-5 lg:px-20 2xl:px-3 xl:px-10 md:px-20 sm:px-5 px-3 flex flex-col md:items-center xl:items-start">
+      {/* <FeatureCard />
         <FeatureCard />
         <FeatureCard />
         <FeatureCard />
-        <FeatureCard />
-        <FeatureCard />
-      </div>
+        <FeatureCard /> */}
     </section>
   );
 };

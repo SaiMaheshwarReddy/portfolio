@@ -6,3 +6,13 @@ export interface IDevToArticle {
   tag_list: string[];
   title: string;
 }
+
+export interface IProject {
+  projectName: string;
+  projectExcerpt: string;
+  primaryImage: { fields: { file: { url: string } } };
+  projectDate: string;
+  slug: string;
+  fields: object;
+  contentTypeId: string;
+}
