@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 import { Heebo } from "next/font/google";
 import SideNav from "@/components/SideNav";
 import Image from "next/image";
+import Link from "next/link";
 
 //👇 Configure our font object
 const heebo = Heebo({
@@ -51,8 +52,12 @@ export default function RootLayout({
           </p>
 
           <div className="flex justify-center items-center  gap-8">
-            <Image src={linkedin} width={30} alt="linkedin" />
-            <Image src={github} width={30} alt="github" />
+            <Link href="https://www.linkedin.com/in/sai-maheshwar/">
+              <Image src={linkedin} width={30} alt="linkedin" />
+            </Link>
+            <Link href="https://github.com/SaiMaheshwarReddy">
+              <Image src={github} width={30} alt="github" />
+            </Link>
           </div>
         </footer>
       </body>
