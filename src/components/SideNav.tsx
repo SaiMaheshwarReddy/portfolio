@@ -53,7 +53,7 @@ const SideNav = () => {
                 Blog
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/about"
                 onClick={handleChange}
@@ -61,7 +61,7 @@ const SideNav = () => {
               >
                 About
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>
