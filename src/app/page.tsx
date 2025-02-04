@@ -4,17 +4,16 @@ import BlogCard from "@/components/BlogCard";
 import Link from "next/link";
 import FeatureCard from "@/components/FeatureCard";
 import { fetchDevToArticles } from "@/utils/devTo";
-import { IDevToArticle } from "./types";
+import { IDevToArticle, IProject } from "./types";
 import DownloadButton from "@/components/DownloadButton";
-import { getProjects } from "@/utils/contentful";
-
+import { getProjectEntries } from "@/utils/contentful";
+export const revalidate = 60;
 export default async function Home() {
   // contentful articles
   // const router = useRouter();
   // const blogs = await getBlogPosts();
   const devToArticles: IDevToArticle[] = await fetchDevToArticles();
-  const projectsList = await getProjects();
-  console.log(projectsList);
+  const projectsList = await getProjectEntries(3);
   return (
     <div className="w-full">
       <section className=" flex justify-center items-center md:items-start flex-col lg:px-20 2xl:px-3 2xl:gap-16 xl:gap-14 xl:px-10 md:px-20 pb-16 sm:pt-6 sm:px-5 px-3 gap-10 md:flex-row-reverse  mx-auto">
@@ -50,9 +49,6 @@ export default async function Home() {
             <Link href="/blog" className="text-cyan-600 hover:underline">
               Vew All
             </Link>
-            {/* <div className="mr-1">Vew more</div> */}
-            {/* <Image src={arrowRight} width={16} alt="arrow" /> */}
-            {/* </div> */}
           </div>
           <div className="flex flex-col sm:flex-row justify-between  items-center flex-wrap lg:mx-0 gap-5 mt-4">
             {devToArticles.map(
@@ -77,15 +73,16 @@ export default async function Home() {
           <p className="text-center text-lg sm:text-left">Featured works</p>
         </div>
         <div className="flex flex-col justify-between items-center gap-5 mt-2">
-          {projectsList.map((project) => {
+          {projectsList.map((project: IProject) => {
             return (
               <FeatureCard
                 key={project.projectName}
                 projectExcerpt={project.projectExcerpt}
                 projectName={project.projectName}
-                primaryImage={project.primaryImage?.fields?.file?.url}
+                primaryImage={project.primaryImage?.src}
                 projectDate={project.projectDate}
                 projectSlug={project.slug}
+                tags={project.tags}
               />
             );
           })}

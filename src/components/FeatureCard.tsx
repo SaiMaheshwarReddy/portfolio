@@ -2,20 +2,29 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
+type FeatureCardProps = {
+  projectExcerpt: string;
+  projectName: string;
+  primaryImage: string | undefined;
+  projectDate: string;
+  projectSlug: string;
+  tags: string[];
+};
 const FeatureCard = ({
   projectExcerpt,
   projectName,
   primaryImage,
   projectDate,
   projectSlug,
-}) => {
+  tags,
+}: FeatureCardProps) => {
   const projectYear = new Date(projectDate).getFullYear();
   return (
-    <Link href={`/blog/${projectSlug}`}>
-      <div className="sm:min-w-80 shadow-md bg-white p-3 rounded-md flex flex-col sm:items-start sm:flex-row gap-3">
-        <div className="w-full sm:w-60 flex-shrink-0 flex-grow-0">
+    <Link href={`/work/${projectSlug}`}>
+      <div className="sm:min-w-80 shadow-lg bg-white p-3 rounded-md flex flex-col sm:items-start sm:flex-row gap-3">
+        <div className="flex-shrink-0">
           <Image
-            className="rounded-md object-cover w-full sm:h-full"
+            className="rounded-md h-[230px] object-cover"
             src={`https:${primaryImage}`}
             width={340}
             height={230}
@@ -28,7 +37,11 @@ const FeatureCard = ({
             <div className="rounded-3xl px-4 py-0.5 bg-black text-white">
               {projectYear}
             </div>
-            <div className="text-gray-500">Design</div>
+            {tags?.map((tag) => (
+              <div key={tag} className="text-gray-500">
+                {tag}
+              </div>
+            ))}
           </div>
           <p>{projectExcerpt}</p>
         </div>

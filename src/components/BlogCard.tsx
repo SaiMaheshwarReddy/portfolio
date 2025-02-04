@@ -22,7 +22,7 @@ const BlogCard = ({
   const getDate = (data: string) => {
     const date = new Date(data);
 
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       day: "numeric",
       month: "short",
       year: "numeric",
@@ -33,7 +33,7 @@ const BlogCard = ({
   };
   return (
     <div
-      className={`md:max-w-full xl:max-w-[460px] 2xl:max-w-[420px] bg-white p-3 shadow-md  rounded-md flex flex-col gap-3 ${className}`}
+      className={`md:max-w-full xl:max-w-[460px] 2xl:max-w-[420px] bg-white p-3 shadow-lg  rounded-md flex flex-col gap-3 ${className}`}
     >
       <p className="text-2xl font-bold  cursor-pointer">
         <Link href={url} target="_blank" className="hover:text-primaryDark">
